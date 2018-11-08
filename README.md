@@ -10,7 +10,7 @@ Build with:
 `docker build --tag jupyterhub .`
 
 
-##Run JupyterHub and create the users
+## Run JupyterHub and create the users
 
 ```bash
 CONF_ABS_PATH=$PWD/conf # configurations on host
