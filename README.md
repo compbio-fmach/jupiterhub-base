@@ -13,6 +13,9 @@ Build with:
 ## Run JupyterHub and create the users
 
 ```bash
+
+cd jupiterhub-base # (this folder)
+
 CONF_ABS_PATH=$PWD/conf # configurations on host
 HOME_HOST_ABS_PATH=$PWD/home_host # homes on host
 SHARED_DATA_ABS_PATH=$PWD/shared # read-only shared
