@@ -12,7 +12,7 @@ cd Docker
 docker build --tag jupyterhub .
 ```
 
-## Run JupyterHub and create the users
+## Run JupyterHub and create users
 
 ```bash
 
@@ -45,7 +45,7 @@ docker run --rm \
     jupyterhub --generate-config
 ```
 
-# Execute an interactive bash shell on the container
+## Execute an interactive bash shell on the container
 
 ```bash
 docker exec -it jhi bash
