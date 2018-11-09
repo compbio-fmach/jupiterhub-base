@@ -1,4 +1,4 @@
-# JupyterHub - CompBio fmach
+# JupyterHub
 
 JupyterHub image with jupyter and the R kernel.
 
@@ -6,40 +6,47 @@ JupyterHub image with jupyter and the R kernel.
 - R 3.5
 
 Build with:
-    
-`docker build --tag jupyterhub .`
 
+```bash
+cd Docker
+docker build --tag jupyterhub .
+```
 
 ## Run JupyterHub and create the users
 
 ```bash
 
-cd jupiterhub-base # (this folder)
+cd jupyterhub-base # (this folder)
 
 CONF_ABS_PATH=$PWD/conf # configurations on host
 HOME_HOST_ABS_PATH=$PWD/home_host # homes on host
 SHARED_DATA_ABS_PATH=$PWD/shared # read-only shared
 
+# run jupyterhub
 docker run -d -p 80:8000 \
     -v "$CONF_ABS_PATH":/conf \
     -v "$HOME_HOST_ABS_PATH":/home_host \
     -v "$SHARED_DATA_ABS_PATH":/shared:ro \
-    --name jhinstance jupyterhub \
+    --name jhi \
+    jupyterhub \
     jupyterhub --config /conf/jupyterhub_config.py
 
 # add users
-docker exec -it jhinstance bash
-root@de3e2265ba73: newusers /conf/users
-root@de3e2265ba73: exit
+docker exec jhi newusers /conf/users.txt
 ```
 
 ## (Optional) create a new template configuration file
 
 ```bash
-docker run --rm -it \
+docker run --rm \
     -v "$CONF_ABS_PATH":/conf \
-    --name jhinstance \
-    jupyterhub /bin/bash
-root@de3e2265ba73: jupyterhub --generate-config
-root@de3e2265ba73: exit
+    -w /conf \
+    jupyterhub \
+    jupyterhub --generate-config
+```
+
+# Execute an interactive bash shell on the container
+
+```bash
+docker exec -it jhi bash
 ```
